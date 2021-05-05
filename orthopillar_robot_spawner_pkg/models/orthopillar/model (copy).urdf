@@ -1,0 +1,118 @@
+<?xml version="1.0" ?>
+<robot name="orthopillar_lidar">
+  <joint name="orthopillar_lidar__left_wheel_hinge" type="fixed">
+    <parent link="orthopillar_lidar__chassis"/>
+    <child link="orthopillar_lidar__left_wheel"/>
+    <origin rpy="0      1.5707  1.5707" xyz="0.11999  0.16     0.09999"/>
+    <axis xyz="9.00000000e-05   9.00000000e-05   1.00000000e+00"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  <joint name="orthopillar_lidar__right_wheel_hinge" type="fixed">
+    <parent link="orthopillar_lidar__chassis"/>
+    <child link="orthopillar_lidar__right_wheel"/>
+    <origin rpy="0      1.5707  1.5707" xyz="0.12 -0.16  0.1"/>
+    <axis xyz="9.00000000e-05   9.00000000e-05   1.00000000e+00"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  <joint name="orthopillar_lidar__laser_joint" type="fixed">
+    <parent link="orthopillar_lidar__chassis"/>
+    <child link="orthopillar_lidar__laser_link"/>
+    <origin rpy="0  0  0" xyz="0.15  0    0.3"/>
+    <axis xyz="0  0  0"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  <link name="orthopillar_lidar__chassis">
+    <inertial>
+      <mass value="0"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <collision name="orthopillar_lidar__collision">
+      <origin rpy="0  0  0" xyz="0    0    0.04"/>
+      <geometry>
+        <box size=".4 .2 .1"/>
+      </geometry>
+    </collision>
+    <collision name="orthopillar_lidar__caster_collision">
+      <origin rpy="0  0  0" xyz="-0.19  0    0.04"/>
+      <geometry>
+        <sphere radius=".06"/>
+      </geometry>
+    </collision>
+    <visual name="orthopillar_lidar__visual">
+      <origin rpy="0  0  0" xyz="0    0    0.06"/>
+      <geometry>
+        <mesh filename="model://warehouse_robot/meshes/robot.dae" scale="0.9 0.5 0.5"/>
+      </geometry>
+    </visual>
+    <visual name="orthopillar_lidar__caster_visual">
+      <origin rpy="0  0  0" xyz="-0.19  0    0.04"/>
+      <geometry>
+        <sphere radius=".06"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="orthopillar_lidar__left_wheel">
+    <inertial>
+      <mass value="0"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <collision name="orthopillar_lidar__collision">
+      <origin rpy="0  0  0" xyz="0    0    0.03"/>
+      <geometry>
+        <cylinder length=".08" radius=".12"/>
+      </geometry>
+    </collision>
+    <visual name="orthopillar_lidar__visual">
+      <origin rpy="0  0  0" xyz="0    0    0.03"/>
+      <geometry>
+        <cylinder length=".08" radius=".12"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="orthopillar_lidar__right_wheel">
+    <inertial>
+      <mass value="0"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <collision name="orthopillar_lidar__collision">
+      <origin rpy="0  0  0" xyz="0    0   -0.03"/>
+      <geometry>
+        <cylinder length=".08" radius=".12"/>
+      </geometry>
+    </collision>
+    <visual name="orthopillar_lidar__visual">
+      <origin rpy="0  0  0" xyz="0    0   -0.03"/>
+      <geometry>
+        <cylinder length=".08" radius=".12"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="orthopillar_lidar__laser_link">
+    <inertial>
+      <mass value="0.1"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <collision name="orthopillar_lidar__collision-base">
+      <origin rpy="0  0  0" xyz="0      0     -0.0145"/>
+      <geometry>
+        <box size="0.05 0.05 0.041"/>
+      </geometry>
+    </collision>
+    <collision name="orthopillar_lidar__collision-top">
+      <origin rpy="0  0  0" xyz="0      0      0.0205"/>
+      <geometry>
+        <cylinder length="0.029" radius="0.021"/>
+      </geometry>
+    </collision>
+    <visual name="orthopillar_lidar__visual">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <mesh filename="model://hokuyo/meshes/hokuyo.dae" scale="1.0 1.0 1.0"/>
+      </geometry>
+    </visual>
+  </link>
+</robot>
