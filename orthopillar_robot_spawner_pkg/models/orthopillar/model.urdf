@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
 <robot name="orthopillar_lidar">
+
   <joint name="left_wheel_hinge" type="fixed">
     <parent link="chassis"/>
     <child link="left_wheel"/>
@@ -7,6 +8,7 @@
     <axis xyz="9.00000000e-05   9.00000000e-05   1.00000000e+00"/>
     <limit effort="0" lower="0" upper="0" velocity="0"/>
   </joint>
+  
   <joint name="right_wheel_hinge" type="fixed">
     <parent link="chassis"/>
     <child link="right_wheel"/>
@@ -14,6 +16,8 @@
     <axis xyz="9.00000000e-05   9.00000000e-05   1.00000000e+00"/>
     <limit effort="0" lower="0" upper="0" velocity="0"/>
   </joint>
+  
+  
   <joint name="laser_joint" type="fixed">
     <parent link="chassis"/>
     <child link="laser_link"/>
@@ -21,6 +25,8 @@
     <axis xyz="0  0  0"/>
     <limit effort="0" lower="0" upper="0" velocity="0"/>
   </joint>
+  
+  
   <link name="chassis">
     <inertial>
       <mass value="0"/>
@@ -42,7 +48,7 @@
     <visual name="visual">
       <origin rpy="0  0  0" xyz="0    0    0.06"/>
       <geometry>
-        <mesh filename="model://warehouse_robot/meshes/robot.dae" scale="0.9 0.5 0.5"/>
+        <mesh filename="$(find orthopillar_robot_spawner_pkg)/models/warehouse_robot/meshes/robot.dae" scale="0.9 0.5 0.5"/>
       </geometry>
     </visual>
     <visual name="caster_visual">
@@ -52,6 +58,8 @@
       </geometry>
     </visual>
   </link>
+  
+  
   <link name="left_wheel">
     <inertial>
       <mass value="0"/>
@@ -71,6 +79,8 @@
       </geometry>
     </visual>
   </link>
+  
+  
   <link name="right_wheel">
     <inertial>
       <mass value="0"/>
@@ -90,6 +100,7 @@
       </geometry>
     </visual>
   </link>
+  
   <link name="laser_link">
     <inertial>
       <mass value="0.1"/>
@@ -111,8 +122,10 @@
     <visual name="visual">
       <origin rpy="0  0  0" xyz="0  0  0"/>
       <geometry>
-        <mesh filename="model://hokuyo/meshes/hokuyo.dae" scale="1.0 1.0 1.0"/>
+        <mesh filename="$(find orthopillar_robot_spawner_pkg)/models/hokuyo/meshes/hokuyo.dae" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
+  
+  
 </robot>

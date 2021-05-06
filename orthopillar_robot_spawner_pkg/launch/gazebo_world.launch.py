@@ -34,7 +34,9 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='True')
     world_file_name = 'warehouse.world'
     pkg_dir = get_package_share_directory('orthopillar_robot_spawner_pkg')
- 
+    
+    default_rviz_config_path = os.path.join(pkg_dir, 'rviz/config.rviz')
+
     os.environ["GAZEBO_MODEL_PATH"] = os.path.join(pkg_dir, 'models')
  
     world = os.path.join(pkg_dir, 'worlds', world_file_name)
@@ -59,6 +61,14 @@ def generate_launch_description():
         #condition=launch.conditions.UnlessCondition(LaunchConfiguration('gui'))
     )
 
+    rviz_node = launch_ros.actions.Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        output='screen',
+        arguments=['-d', LaunchConfiguration('rvizconfig')],
+    )
+
     gazebo = ExecuteProcess(
             cmd=['gazebo', '--verbose', world, '-s', 'libgazebo_ros_init.so', 
             '-s', 'libgazebo_ros_factory.so'],
@@ -72,9 +82,12 @@ def generate_launch_description():
                         arguments=['orthopillar', 'demo', '-1.5', '-4.0', '0.0'],
                         output='screen')
  
-    return LaunchDescription([
+    return launch.LaunchDescription([
+        launch.actions.DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
+                                            description='Absolute path to rviz config file'),
         gazebo,
         spawn_entity,
         robot_state_publisher_node,
-        joint_state_publisher_node
+        joint_state_publisher_node,
+        rviz_node
     ])
