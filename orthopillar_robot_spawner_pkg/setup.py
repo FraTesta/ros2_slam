@@ -30,6 +30,8 @@ setup(
         
         # Path to the world file (i.e. warehouse + global environment)
         (os.path.join('share', package_name,'models/'), glob('./worlds/*')),
+        
+        (os.path.join('share', package_name,'rviz/'), glob('./rviz/*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
