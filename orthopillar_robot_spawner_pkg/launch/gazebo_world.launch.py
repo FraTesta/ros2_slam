@@ -42,24 +42,24 @@ def generate_launch_description():
     world = os.path.join(pkg_dir, 'worlds', world_file_name)
     launch_file_dir = os.path.join(pkg_dir, 'launch')
 
-    urdf_file = os.path.join(pkg_dir, 'models/orthopillar', 'model.urdf')
+    #urdf_file = os.path.join(pkg_dir, 'models/robot_description', 'model.urdf')
     
-    doc = xacro.parse(open(urdf_file))
-    xacro.process_doc(doc)
-    robot_description = {'robot_description': doc.toxml()}
+    #doc = xacro.parse(open(urdf_file))
+    #xacro.process_doc(doc)
+    #robot_description = {'robot_description': doc.toxml()}
 
-    robot_state_publisher_node = launch_ros.actions.Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        output='screen', 
-        parameters=[robot_description]
-    )
-    joint_state_publisher_node = launch_ros.actions.Node(
-        package='joint_state_publisher',
-        executable='joint_state_publisher',
-        name='joint_state_publisher',
+    #robot_state_publisher_node = launch_ros.actions.Node(
+       # package='robot_state_publisher',
+        #executable='robot_state_publisher',
+        #output='screen', 
+        #parameters=[robot_description]
+    #)
+    #joint_state_publisher_node = launch_ros.actions.Node(
+     #   package='joint_state_publisher',
+      #  executable='joint_state_publisher',
+       # name='joint_state_publisher',
         #condition=launch.conditions.UnlessCondition(LaunchConfiguration('gui'))
-    )
+    #)
 
     rviz_node = launch_ros.actions.Node(
         package='rviz2',
@@ -83,11 +83,11 @@ def generate_launch_description():
                         output='screen')
  
     return launch.LaunchDescription([
-        launch.actions.DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
-                                            description='Absolute path to rviz config file'),
+        #launch.actions.DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
+                                          #  description='Absolute path to rviz config file'),
         gazebo,
         spawn_entity,
-        robot_state_publisher_node,
-        joint_state_publisher_node,
-        rviz_node
+        #robot_state_publisher_node,
+        #joint_state_publisher_node,
+        #rviz_node
     ])

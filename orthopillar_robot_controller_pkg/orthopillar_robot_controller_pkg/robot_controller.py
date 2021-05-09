@@ -119,7 +119,8 @@ class Controller(Node):
     self.dist_thresh_wf = 0.50 # in meters  
  
     # We don't want to get too close to the wall though.
-    self.dist_too_close_to_wall = 0.19 # in meters
+    #self.dist_too_close_to_wall = 0.19 # in meters
+    self.dist_too_close_to_wall = 0.5 # in meters
  
   def state_estimate_callback(self, msg):
     """

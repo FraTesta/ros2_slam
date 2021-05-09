@@ -26,6 +26,8 @@ setup(
         (os.path.join('share', package_name,'models/small_warehouse/'), glob('./models/small_warehouse/*')),
 
         # Path to the mobile robot sdf file
+        
+        
         (os.path.join('share', package_name,'models/orthopillar/'), glob('./models/orthopillar/*')),
         
         # Path to the world file (i.e. warehouse + global environment)
