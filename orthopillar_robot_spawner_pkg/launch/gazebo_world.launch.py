@@ -111,13 +111,14 @@ def generate_launch_description():
        #                     output='screen')
  
     return launch.LaunchDescription([
-        #launch.actions.DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
-                                          #  description='Absolute path to rviz config file'),
+        launch.actions.DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
+                                           description='Absolute path to rviz config file'),
         gazebo,
         spawn_entity,
         robot_state_publisher_node,
         joint_state_publisher_node,
-        joint_state_publisher_gui_node
+        joint_state_publisher_gui_node,
+        
         #state_publisher
-        #rviz_node
+        rviz_node
     ])
