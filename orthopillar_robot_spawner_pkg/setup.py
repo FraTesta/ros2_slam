@@ -34,6 +34,8 @@ setup(
         (os.path.join('share', package_name,'models/'), glob('./worlds/*')),
         
         (os.path.join('share', package_name,'rviz/'), glob('./rviz/*')),
+        
+       # (os.path.join('share', package_name,'urdf/'), glob('./urdf/*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -45,6 +47,7 @@ setup(
     entry_points={
         'console_scripts': [
           'spawn_demo = orthopillar_robot_spawner_pkg.spawn_demo:main'
+          #'state_publisher = orthopillar_robot_spawner_pkg.state_publisher:main'
         ],
     },
 )

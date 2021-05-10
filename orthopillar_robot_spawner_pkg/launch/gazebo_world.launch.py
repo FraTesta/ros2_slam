@@ -31,7 +31,7 @@ from ament_index_python.packages import get_package_share_directory
 import xacro
  
 def generate_launch_description():
-    use_sim_time = LaunchConfiguration('use_sim_time', default='True')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     world_file_name = 'warehouse.world'
     pkg_dir = get_package_share_directory('orthopillar_robot_spawner_pkg')
     
@@ -42,24 +42,40 @@ def generate_launch_description():
     world = os.path.join(pkg_dir, 'worlds', world_file_name)
     launch_file_dir = os.path.join(pkg_dir, 'launch')
 
-    #urdf_file = os.path.join(pkg_dir, 'models/robot_description', 'model.urdf')
+    urdf_file = os.path.join(pkg_dir, 'models/orthopillar', 'model.urdf')
     
-    #doc = xacro.parse(open(urdf_file))
-    #xacro.process_doc(doc)
-    #robot_description = {'robot_description': doc.toxml()}
+    doc = xacro.parse(open(urdf_file))
+    xacro.process_doc(doc)
+    robot_description = {'robot_description': doc.toxml()}
 
-    #robot_state_publisher_node = launch_ros.actions.Node(
-       # package='robot_state_publisher',
-        #executable='robot_state_publisher',
-        #output='screen', 
-        #parameters=[robot_description]
-    #)
-    #joint_state_publisher_node = launch_ros.actions.Node(
-     #   package='joint_state_publisher',
-      #  executable='joint_state_publisher',
-       # name='joint_state_publisher',
+    #urdf_file_name = 'urdf/model.urdf.xml'
+    #urdf = os.path.join(
+     #   get_package_share_directory('orthopillar_robot_spawner_pkg'),
+      #  urdf_file_name)
+    #with open(urdf, 'r') as infp:
+     #   robot_description = infp.read()
+
+    robot_state_publisher_node = launch_ros.actions.Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        output='screen', 
+        parameters=[robot_description]
+    )
+    
+    
+    joint_state_publisher_node = launch_ros.actions.Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        name='joint_state_publisher',
         #condition=launch.conditions.UnlessCondition(LaunchConfiguration('gui'))
-    #)
+    )
+
+    joint_state_publisher_gui_node = launch_ros.actions.Node(
+        package='joint_state_publisher_gui',
+        executable='joint_state_publisher_gui',
+        name='joint_state_publisher_gui',
+        #condition=launch.conditions.IfCondition(LaunchConfiguration('gui'))
+    )
 
     rviz_node = launch_ros.actions.Node(
         package='rviz2',
@@ -81,13 +97,27 @@ def generate_launch_description():
     spawn_entity = Node(package='orthopillar_robot_spawner_pkg', executable='spawn_demo',
                         arguments=['orthopillar', 'demo', '-1.5', '-4.0', '0.0'],
                         output='screen')
+
+    #robot_state_publisher = Node( package='robot_state_publisher', 
+    #                            executable='robot_state_publisher',
+     #                           name='robot_state_publisher',
+      #                          output='screen',
+       #                         parameters=[{'use_sim_time': use_sim_time, 'robot_description': robot_description}],
+        #                        arguments=[urdf])
+
+    #state_publisher = Node( package='orthopillar_robot_spawner_pkg',
+     #                       executable='state_publisher',
+      #                      name='state_publisher',
+       #                     output='screen')
  
     return launch.LaunchDescription([
         #launch.actions.DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
                                           #  description='Absolute path to rviz config file'),
         gazebo,
         spawn_entity,
-        #robot_state_publisher_node,
-        #joint_state_publisher_node,
+        robot_state_publisher_node,
+        joint_state_publisher_node,
+        joint_state_publisher_gui_node
+        #state_publisher
         #rviz_node
     ])
