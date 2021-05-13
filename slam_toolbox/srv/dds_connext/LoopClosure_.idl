@@ -1,0 +1,49 @@
+// generated from rosidl_generator_dds_idl/resource/idl.idl.em
+// with input from slam_toolbox:srv/LoopClosure.idl
+// generated code does not contain a copyright notice
+
+#ifndef __slam_toolbox__srv__loop_closure__idl__
+#define __slam_toolbox__srv__loop_closure__idl__
+
+
+module slam_toolbox {
+
+module srv {
+
+module dds_ {
+
+
+struct LoopClosure_Request_ {
+octet structure_needs_at_least_one_member_;
+
+};
+
+
+};  // module dds_
+
+};  // module srv
+
+};  // module slam_toolbox
+
+
+module slam_toolbox {
+
+module srv {
+
+module dds_ {
+
+
+struct LoopClosure_Response_ {
+octet structure_needs_at_least_one_member_;
+
+};
+
+
+};  // module dds_
+
+};  // module srv
+
+};  // module slam_toolbox
+
+
+#endif  // __slam_toolbox__srv__loop_closure__idl__

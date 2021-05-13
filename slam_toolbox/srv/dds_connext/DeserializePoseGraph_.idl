@@ -1,0 +1,59 @@
+// generated from rosidl_generator_dds_idl/resource/idl.idl.em
+// with input from slam_toolbox:srv/DeserializePoseGraph.idl
+// generated code does not contain a copyright notice
+#include "geometry_msgs/msg/dds_connext/Pose2D_.idl"
+
+#ifndef __slam_toolbox__srv__deserialize_pose_graph__idl__
+#define __slam_toolbox__srv__deserialize_pose_graph__idl__
+
+
+module slam_toolbox {
+
+module srv {
+
+module dds_ {
+
+module DeserializePoseGraph_Request_Constants {
+const octet UNSET_ = 0;
+const octet START_AT_FIRST_NODE_ = 1;
+const octet START_AT_GIVEN_POSE_ = 2;
+const octet LOCALIZE_AT_POSE_ = 3;
+
+};
+
+struct DeserializePoseGraph_Request_ {
+string filename_;
+octet match_type_;
+geometry_msgs::msg::dds_::Pose2D_ initial_pose_;
+
+};
+
+
+};  // module dds_
+
+};  // module srv
+
+};  // module slam_toolbox
+
+
+module slam_toolbox {
+
+module srv {
+
+module dds_ {
+
+
+struct DeserializePoseGraph_Response_ {
+octet structure_needs_at_least_one_member_;
+
+};
+
+
+};  // module dds_
+
+};  // module srv
+
+};  // module slam_toolbox
+
+
+#endif  // __slam_toolbox__srv__deserialize_pose_graph__idl__

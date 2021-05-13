@@ -32,7 +32,7 @@ class StatePublisher(Node):
         # message declarations
         odom_trans = TransformStamped()
         odom_trans.header.frame_id = 'odom'
-        odom_trans.child_frame_id = 'axis'
+        odom_trans.child_frame_id = 'chassis'
         joint_state = JointState()
 
         try:
